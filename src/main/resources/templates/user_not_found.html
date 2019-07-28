@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/header :: header"></head>
+<body>
+
+<div class="container border">
+
+  <h1>User not found</h1>
+  <div class="alert alert-info">
+    <strong>Info!</strong> User not found,
+    id=[<span th:text="${userid_not_found}"></span>]
+  </div>
+
+</div>
+<div th:replace="fragments/footer :: footer"> </div>
+</body>
+</html>

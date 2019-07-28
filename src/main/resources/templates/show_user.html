@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/header :: header"></head>
+<body>
+
+<div class="container border">
+
+  <h1 th:text="${user}"></h1>
+  <div class="alert alert-info">
+    <strong>Info!</strong> User [] has been created
+  </div>
+  <div class="alert alert-info" th:text="${user.name}"></div>
+  
+
+</div>
+<div th:replace="fragments/footer :: footer"> </div>
+</body>
+</html>

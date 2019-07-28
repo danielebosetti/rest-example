@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/slate/bootstrap.min.css" >
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+  </head>
+<body>
+
+<script>
+
+
+function logToDiv(msg) {
+  $('#msg-info-1').text(msg)
+  $('#msg-info-1').addClass('alert alert-info')
+}
+
+function go() {
+  $.get('http://localhost:8087/api/user?id=45', function (data, status) {
+    logToDiv('User id='+data.id + " name="+data.name)
+  })
+}
+
+// Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+// Make the actual CORS request.
+function makeCorsRequest() {
+  // This is a sample server that supports CORS.
+  var url = 'http://html5rocks-cors.s3-website-us-east-1.amazonaws.com/index.html';
+
+  var xhr = createCORSRequest('GET', url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  console.log('xhr='+xhr)
+  
+  xhr.onloadstart = function() {
+    console.log('onloadstart..')
+  }
+  xhr.onprogress = function() {
+    console.log('onprogress..')
+  }
+  xhr.onloadend = function() {
+    console.log('onloadend..')
+  }
+  
+  // Response handlers.
+  xhr.onload = function() {
+    var text = xhr.responseText;
+    logToDiv('Response from CORS request to ' + url + ': text=' + text);
+  };
+
+  xhr.onerror = function() {
+    alert('makeCorsRequest: error');
+  };
+
+  xhr.send();
+}
+
+</script>
+
+<div class="container border">
+
+<div class="row my-2 border">
+  <div class="border">
+  <a class="btn btn-info" href="http://localhost:8087/api/adduser">Add User</a>
+  </div>
+  <div class="border">
+  <a class="btn btn-info" href="http://localhost:8087/">localhost:8087</a>
+  </div>
+</div>
+
+
+<div class="row my-2 border">
+<div class="col-md-12 border">
+  <form action="http://localhost:8087/api/user" method="get" class="form-inline">
+    <div class="form-group">
+      <label for="user_id">User Id:</label>
+      <input class="form-control" id="user_id" name="id" value="45"></input>
+      <button type="submit" class="btn btn-info">Get user</button>
+    </div>
+    </div>
+  </form>
+</div>
+
+<div class="row my-2">
+  <div class="col-md-12">
+    <button type="button col-md-6" onclick="go();" class="btn btn-success">CORS get</button>
+  </div>
+</div>
+
+<div class="row my-2">
+  <div class="col-md-12">
+    <button type="button col-md-6" onclick="makeCorsRequest();" class="btn btn-success">makeCorsRequest</button>
+  </div>
+</div>
+
+<div id="msg-info-1">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
+</html>

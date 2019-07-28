@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+
+<div th:replace="fragments/header :: navbar"></div>
+<div class="container border">
+
+	<div class="row p-1">
+		<div th:each="user: ${users}" th:classappend="${user.active} ? 'btn-info' : 'btn-success'"
+		 class="btn col-md-3 p-1" >
+[<span th:text="${user.id}" />] <span th:text="${user.name}" /> active=<span th:text="${user.active}" />
+		</div>
+	</div>
+	
+</div>
+
+<div th:replace="fragments/footer :: footer"> </div>
+</body>
+</html>

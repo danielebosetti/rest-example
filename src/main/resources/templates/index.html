@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+
+<div th:replace="fragments/header :: navbar"></div>
+<div class="container border">
+	<a class="btn btn-info" href="/api/adduser">Add new user</a><br>
+	<a class="btn btn-info" href="/api/get_user.html">Find user</a><br>
+	<a class="btn btn-info" href="/api/allusers">Get all users</a><br>
+	<a class="btn btn-info" href="/api/allusersview">View all users</a><br>
+
+<div th:replace="fragments/footer :: footer"> </div>
+</body>
+</html>
